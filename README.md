@@ -1,57 +1,65 @@
-## fastsql
+## markdownmail
 
-A bit of extra usability for sqlalchemy.
+Send templated emails in markdown.
 
 ### Install
 
 ```bash
-pip install git+https://github.com/jph00/fastsql
+pip install git+https://github.com/jph00/markdownmail
 ```
 
-### Usage examples
+### How to use
 
-Connect to db and return filled `MetaData` object (sqlalchemy format)
+#### Provide your SMTP server settings, e.g. for [fastmail](https://www.fastmail.com)
+
 ```
-# from https://pypi.org/project/python-dotenv/
-load_dotenv('.env.local')
-
-USER = environ['SQLUSER']
-PASS = environ['SQLPASS']
-DRIV = 'mysql+pymysql'
-DB   = 'prisma'
-HOST = '127.0.0.1'
-PORT = 3306
-
-db = conn_db(DRIV, USER, PASS, HOST, PORT, DB)
+cfg = dict(EMAIL_HOST='smtp.fastmail.com', EMAIL_PORT=465,
+    EMAIL_HOST_USER='XXX@fastmail.com', EMAIL_HOST_PASSWORD='XXX', EMAIL_USE_SSL=True)
 ```
 
-Show list of table names
+#### Provide your email details
+
 ```
-' '.join(db.tables)
+from_addr = get_addr('XXX@fastmail.com', 'Jeremy Howard')
+to_addrs = [get_addr('douglas@example.com', 'Douglas Adams'),
+            get_addr('cleese@example.com', 'John Cleese')]
+inserts  = [{'special': "Thanks for all the fish."},
+            {'special': "That was a silly walk."}]
+
+msg = """
+## Hello there!
+
+This is an exciting message with three parts:
+
+- This bit
+- That bit
+- The other bit
+
+Here is your special message: *{special}*
+"""
 ```
 
-Get the `User` table. Note that `db` supports tab completion of table names here. The `Table` object and collection of columns is returned as a tuple.
+Note that anything in curly brackets will be replaced with the contents of the `inserts` dictionary for that address. If there are no bracketed variables to replace, then you don't need to pass any `inserts`.
+
+#### Create `MarkdownMailer`
+
 ```
-u,uc = db.User
+ml = MarkdownMail(to_addrs, from_addr, subj='A message', msg=msg, server_settings=cfg, inserts=inserts)
 ```
 
-The collection of columns supports tab completion too.
+#### Optional: test send
+
 ```
-uc.billingAddress
+ml.set_test(True)
+ml.send_msgs()
+ml.reset()
 ```
 
-Get a data frame, with optional `where` clause and `limit`, with the `df` method on either `Table` or `MetaData`.
-```
-# These are equivalent
-u.df(where=uc.email.startswith('j'), limit=1)
-db.df(u.select(uc.email.startswith('j'), limit=1))
-```
+This will print all the messages to be sent to the console, and will not actually send them. maildownmail remembers what emails it was successfully sent so far (including test sends) and won't re-send them when you call `send_msgs` again; therefore you should run `reset` to reset the counter after a test send.
 
-You can also pass SQL statements directly.
-```
-# returns a DataFrame
-db.sql("select count(*) from User")
-# returns None
-db.sql("insert into User select * from User where email = 'xxx'")
-```
+#### Send your messages
 
+```
+ml.set_test(False)
+ml.send_msgs()
+```
