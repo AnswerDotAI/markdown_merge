@@ -1,3 +1,4 @@
+baseurl: /markdown_merge
 repository: jph00/markdown_merge
 output: web
 topnav_title: MarkdownMailMerge
