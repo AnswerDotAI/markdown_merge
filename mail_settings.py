@@ -1,0 +1,7 @@
+SECRET_KEY='foobar'
+EMAIL_HOST='smtp.fastmail.com'
+EMAIL_PORT=465
+EMAIL_HOST_USER='aa@example.com'
+EMAIL_HOST_PASSWORD='XXX'
+EMAIL_USE_SSL=True
+

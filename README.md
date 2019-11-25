@@ -1,11 +1,11 @@
-## markdownmail
+## markdownmailmerge
 
 Send templated emails in markdown.
 
 ### Install
 
 ```bash
-pip install git+https://github.com/jph00/markdownmail
+pip install git+https://github.com/jph00/markdownmailmerge
 ```
 
 ### How to use
@@ -41,10 +41,10 @@ Here is your special message: *{special}*
 
 Note that anything in curly brackets will be replaced with the contents of the `inserts` dictionary for that address. If there are no bracketed variables to replace, then you don't need to pass any `inserts`.
 
-#### Create `MarkdownMailer`
+#### Create `MarkdownMailMergeer`
 
 ```
-ml = MarkdownMail(to_addrs, from_addr, subj='A message', msg=msg, server_settings=cfg, inserts=inserts)
+ml = MarkdownMailMerge(to_addrs, from_addr, subj='A message', msg=msg, server_settings=cfg, inserts=inserts)
 ```
 
 #### Optional: test send
