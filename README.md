@@ -1,72 +1,83 @@
-## markdownmailmerge
+# MarkdownMerge
 
 Send templated emails in markdown.
 
-### Install
 
-```bash
-pip install git+https://github.com/jph00/markdownmailmerge
-```
+## Install
 
-### How to use
+`pip install markdown_merge`
 
-#### Provide your SMTP server settings, e.g. for [fastmail](https://www.fastmail.com)
+## How to use
 
-```
+### Provide your SMTP server settings, e.g. for fastmail
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```python
 cfg = dict(EMAIL_HOST='smtp.fastmail.com', EMAIL_PORT=465,
     EMAIL_HOST_USER='XXX@fastmail.com', EMAIL_HOST_PASSWORD='XXX', EMAIL_USE_SSL=True)
 ```
 
-#### Provide your email details
+</div>
 
-```
+</div>
+
+Alternately you can put your server settings in `mail_settings.py`. There's an example settings file in the repo.
+
+### Provide your email details
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```python
 from_addr = get_addr('XXX@fastmail.com', 'Jeremy Howard')
 to_addrs = [get_addr('douglas@example.com', 'Douglas Adams'),
             get_addr('cleese@example.com', 'John Cleese')]
 inserts  = [{'special': "Thanks for all the fish."},
             {'special': "That was a silly walk."}]
 
-msg = """
-## Hello there!
+msg = """## Hello there!
 
-This is an exciting message with three parts:
-
-- This bit
-- That bit
-- The other bit
-
-Here is your special message: *{special}*
-"""
+Here is your special message: *{special}*"""
 ```
 
-Your message should be in markdown format. It will be converted into a two part email, containing both a plain text and an HTML part, so recipients will see whatever format they're set as their preference for viewing mail. Note that anything in curly brackets will be replaced with the contents of the `inserts` dictionary for that address. If there are no bracketed variables to replace, then you don't need to pass any `inserts`.
+</div>
 
-#### Create `MarkdownMailMerge`
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
+```python
+ml = MarkdownMerge(to_addrs, from_addr, 'A message', msg=msg, inserts=inserts)
 ```
-ml = MarkdownMailMerge(to_addrs, from_addr, subj='A message', msg=msg, server_settings=cfg, inserts=inserts)
-```
 
-#### Optional: test send
+</div>
 
-```
+</div>
+
+Optionally, enable *test* mode to just print the messages, instead of sending them.
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```python
 ml.set_test(True)
+```
+
+</div>
+
+</div>
+
+### Send your messages
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```python
 ml.send_msgs()
-ml.reset()
 ```
 
-This will print all the messages to be sent to the console, and will not actually send them. `MarkdownMail` remembers what emails it was successfully sent so far (including test sends) and won't re-send them when you call `send_msgs` again; therefore you should run `reset` to reset the counter after a test send.
+</div>
 
-#### Send your messages
+</div>
 
-```
-ml.set_test(False)
-ml.send_msgs()
-```
+## Credits
 
-### TODO
-
-- Attachments
-- Images
-
-PRs welcome.
+All the hard work is done by Django mail, python-markdown, and python. So thanks to the authors of those projects!
