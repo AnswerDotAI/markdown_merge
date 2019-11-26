@@ -10,9 +10,9 @@ entries:
       title: Overview
       url: ''
     - output: web,pdf
-      title: Details
+      title: markdown_merge
       url: markdown_merge
     output: web
-    title: MarkdownMail
+    title: markdown_merge
   output: web
   title: Sidebar
