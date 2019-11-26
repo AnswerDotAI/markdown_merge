@@ -8,10 +8,10 @@ entries:
   - folderitems:
     - output: web,pdf
       title: Overview
-      url: index.html
+      url: ''
     - output: web,pdf
       title: Details
-      url: markdown_merge.html
+      url: markdown_merge
     output: web
     title: MarkdownMail
   output: web
