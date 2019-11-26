@@ -4,7 +4,8 @@ output: web
 topnav_title: MarkdownMailMerge
 site_title: MarkdownMailMerge
 company_name: fast.ai
-google_analytics: UA-89522379-3
+google_analytics:
+google_search:
 description: "Send templated emails in markdown"
 
 host: 127.0.0.1
