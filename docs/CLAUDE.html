@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Send templated emails in markdown.">
 
-<title>MarkdownMerge – markdown_merge</title>
+<title>claude – markdown_merge</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -106,11 +70,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="MarkdownMerge – markdown_merge">
-<meta property="og:description" content="Send templated emails in markdown.">
+<meta property="og:title" content="markdown_merge">
+<meta property="og:description" content="Send templated emails in markdown">
 <meta property="og:site_name" content="markdown_merge">
-<meta name="twitter:title" content="MarkdownMerge – markdown_merge">
-<meta name="twitter:description" content="Send templated emails in markdown.">
+<meta name="twitter:title" content="markdown_merge">
+<meta name="twitter:description" content="Send templated emails in markdown">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -135,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">MarkdownMerge</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -149,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MarkdownMerge</span></a>
   </div>
 </li>
@@ -183,108 +147,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a></li>
-  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a>
+  <li><a href="#claude.md" id="toc-claude.md" class="nav-link active" data-scroll-target="#claude.md">CLAUDE.md</a>
   <ul class="collapse">
-  <li><a href="#provide-your-smtp-server-settings-e.g.-for-aws-ses" id="toc-provide-your-smtp-server-settings-e.g.-for-aws-ses" class="nav-link" data-scroll-target="#provide-your-smtp-server-settings-e.g.-for-aws-ses">Provide your SMTP server settings, e.g.&nbsp;for AWS SES</a></li>
-  <li><a href="#provide-your-email-details" id="toc-provide-your-email-details" class="nav-link" data-scroll-target="#provide-your-email-details">Provide your email details</a></li>
-  <li><a href="#send-your-messages" id="toc-send-your-messages" class="nav-link" data-scroll-target="#send-your-messages">Send your messages</a></li>
+  <li><a href="#development-commands" id="toc-development-commands" class="nav-link" data-scroll-target="#development-commands">Development Commands</a>
+  <ul class="collapse">
+  <li><a href="#building" id="toc-building" class="nav-link" data-scroll-target="#building">Building</a></li>
+  </ul></li>
+  <li><a href="#architecture-overview" id="toc-architecture-overview" class="nav-link" data-scroll-target="#architecture-overview">Architecture Overview</a>
+  <ul class="collapse">
+  <li><a href="#key-components" id="toc-key-components" class="nav-link" data-scroll-target="#key-components">Key Components</a></li>
+  <li><a href="#development-workflow" id="toc-development-workflow" class="nav-link" data-scroll-target="#development-workflow">Development Workflow</a></li>
+  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a></li>
+  <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">Dependencies</a></li>
+  </ul></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/answerdotai/markdown_merge/tree/master/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/answerdotai/markdown_merge/tree/master/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="CLAUDE-commonmark.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">MarkdownMerge</h1>
-</div>
-
-<div>
-  <div class="description">
-    Send templated emails in markdown.
-  </div>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<div id="cell-2" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#hide</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> markdown_merge.markdown_merge <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="install" class="level2">
-<h2 class="anchored" data-anchor-id="install">Install</h2>
-<p><code>pip install markdown_merge</code></p>
+<section id="claude.md" class="level1">
+<h1>CLAUDE.md</h1>
+<p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+<section id="development-commands" class="level2">
+<h2 class="anchored" data-anchor-id="development-commands">Development Commands</h2>
+<section id="building" class="level3">
+<h3 class="anchored" data-anchor-id="building">Building</h3>
+<ul>
+<li><code>nbdev_export</code> - Export notebooks to Python modules (standard nbdev workflow)</li>
+</ul>
 </section>
-<section id="how-to-use" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use">How to use</h2>
-<section id="provide-your-smtp-server-settings-e.g.-for-aws-ses" class="level3">
-<h3 class="anchored" data-anchor-id="provide-your-smtp-server-settings-e.g.-for-aws-ses">Provide your SMTP server settings, e.g.&nbsp;for AWS SES</h3>
-<div id="cell-7" class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-8" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>servernm <span class="op">=</span> <span class="st">'email-smtp.us-west-2.amazonaws.com'</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> os.getenv(<span class="st">'SES_SMTP_USER'</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>password <span class="op">=</span> os.getenv(<span class="st">'SES_SMTP_PASS'</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>smtp_cfg <span class="op">=</span> <span class="bu">dict</span>(host<span class="op">=</span>servernm, port<span class="op">=</span><span class="dv">587</span>, user<span class="op">=</span>username, password<span class="op">=</span>password, use_ssl<span class="op">=</span><span class="va">False</span>, use_tls<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You can configure your SMTP server settings using the <code>smtp_cfg</code> dictionary format shown above. The example uses AWS SES with environment variables for credentials.</p>
 </section>
-<section id="provide-your-email-details" class="level3">
-<h3 class="anchored" data-anchor-id="provide-your-email-details">Provide your email details</h3>
-<div id="cell-11" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>from_addr <span class="op">=</span> get_addr(<span class="st">'XXX@fastmail.com'</span>, <span class="st">'Jeremy Howard'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>to_addrs <span class="op">=</span> [get_addr(<span class="st">'douglas@example.com'</span>, <span class="st">'Douglas Adams'</span>),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            get_addr(<span class="st">'cleese@example.com'</span>, <span class="st">'John Cleese'</span>)]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>inserts  <span class="op">=</span> [{<span class="st">'special'</span>: <span class="st">"Thanks for all the fish."</span>},</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            {<span class="st">'special'</span>: <span class="st">"That was a silly walk."</span>}]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"""## Hello there!</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">Here is your special message: *</span><span class="sc">{special}</span><span class="st">*"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-12" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ml <span class="op">=</span> MarkdownMerge(to_addrs, from_addr, <span class="st">'A message'</span>, msg, smtp_cfg<span class="op">=</span>smtp_cfg, inserts<span class="op">=</span>inserts, test<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The <code>test=True</code> parameter prints the messages instead of sending them.</p>
+<section id="architecture-overview" class="level2">
+<h2 class="anchored" data-anchor-id="architecture-overview">Architecture Overview</h2>
+<p>This is an nbdev-based Python library for sending templated emails in markdown format. The codebase follows nbdev conventions where the actual implementation is written in Jupyter notebooks and auto-generated into Python modules.</p>
+<section id="key-components" class="level3">
+<h3 class="anchored" data-anchor-id="key-components">Key Components</h3>
+<p><strong>Core Module</strong>: <code>markdown_merge/markdown_merge.py</code> (auto-generated from <code>00_markdown_merge.ipynb</code>) - <code>MarkdownMerge</code>: Main class for sending templated email merge messages - <code>get_addr()</code>: Convert email/name to Address objects - <code>md2email()</code>: Create multipart email from markdown - <code>smtp_connection()</code>: Context manager for SMTP connections - <code>attach_file()</code>: Attach files to email messages</p>
+<p><strong>Source Files</strong>: - <code>00_markdown_merge.ipynb</code>: Main implementation notebook with API code - <code>index.ipynb</code>: Documentation and usage examples (generates README.md)</p>
 </section>
-<section id="send-your-messages" class="level3">
-<h3 class="anchored" data-anchor-id="send-your-messages">Send your messages</h3>
-<div id="cell-15" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ml.send_msgs()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>To: Douglas Adams &lt;douglas@example.com&gt;
-----------------------------------------
-## Hello there!
+<section id="development-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="development-workflow">Development Workflow</h3>
+<ol type="1">
+<li>Edit notebooks (<code>.ipynb</code> files) - never edit the generated <code>.py</code> files directly</li>
+<li>Run <code>nbdev_export</code> to regenerate Python modules from notebooks</li>
+<li>The library supports email templating with variable substitution using <code>{variable}</code> syntax</li>
+</ol>
+</section>
+<section id="configuration" class="level3">
+<h3 class="anchored" data-anchor-id="configuration">Configuration</h3>
+<ul>
+<li><code>settings.ini</code>: nbdev configuration with package metadata</li>
+<li>Uses standard SMTP configuration with support for SSL/TLS connections</li>
+</ul>
+</section>
+<section id="dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="dependencies">Dependencies</h3>
+<ul>
+<li><code>fastcore</code>: Utility functions</li>
+<li><code>markdown</code>: Markdown to HTML conversion</li>
+<li>Standard library: <code>smtplib</code>, <code>email</code> modules for email handling</li>
+</ul>
 
-Here is your special message: *Thanks for all the fish.*
-========================================
 
-To: John Cleese &lt;cleese@example.com&gt;
-----------------------------------------
-## Hello there!
-
-Here is your special message: *That was a silly walk.*
-========================================
-</code></pre>
-</div>
-</div>
-
-
+</section>
 </section>
 </section>
 

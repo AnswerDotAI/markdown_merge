@@ -1,24 +1,15 @@
----
-layout: none
-search: exclude
----
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% for post in site.posts %}
-  {% unless post.search == "exclude" %}
   <url>
-    <loc>{{site.url}}{{post.url}}</loc>
+    <loc>https://answerdotai.github.io/index.html</loc>
+    <lastmod>2025-09-14T07:53:01.094Z</lastmod>
   </url>
-  {% endunless %}
-  {% endfor %}
-
-
-  {% for page in site.pages %}
-  {% unless page.search == "exclude" %}
   <url>
-    <loc>{{site.url}}{{ page.url}}</loc>
+    <loc>https://answerdotai.github.io/markdown_merge.html</loc>
+    <lastmod>2025-09-14T07:53:41.113Z</lastmod>
   </url>
-  {% endunless %}
-  {% endfor %}
+  <url>
+    <loc>https://answerdotai.github.io/CLAUDE.html</loc>
+    <lastmod>2025-09-14T07:23:07.201Z</lastmod>
+  </url>
 </urlset>
