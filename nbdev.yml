@@ -1,9 +1,0 @@
-project:
-  output-dir: docs
-
-website:
-  title: "markdown_merge"
-  site-url: "https://answerdotai.github.io/"
-  description: "Send templated emails in markdown"
-  repo-branch: master
-  repo-url: "https://github.com/answerdotai/markdown_merge/tree/master/"

@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "markdown_merge"
+  site-url: "https://AnswerDotAI.github.io/markdown_merge"
+  description: "Send email using markdown"
+  repo-branch: master
+  repo-url: "https://github.com/AnswerDotAI/markdown_merge"
