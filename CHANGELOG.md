@@ -2,6 +2,13 @@
 
 <!-- do not remove -->
 
+## 0.1.5
+
+### New Features
+
+- Handle non-ascii addresses and SMTP reconnects ([#8](https://github.com/AnswerDotAI/markdown_merge/issues/8))
+
+
 ## 0.1.4
 
 - init version
