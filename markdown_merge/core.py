@@ -12,11 +12,13 @@ from fastcore.utils import *
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
+from email.policy import EmailPolicy
 from email import encoders
 
 from contextlib import contextmanager
 from markdown import markdown
 from email.headerregistry import Address
+from email.header import Header
 from time import sleep
 
 # %% ../nbs/00_core.ipynb
@@ -38,7 +40,7 @@ def attach_file(msg, f):
 # %% ../nbs/00_core.ipynb
 def create_multipart_msg(subj, from_addr, to_addrs, md=None, html=None, attach=None):
     "Create a multipart email with markdown text and HTML"
-    msg = MIMEMultipart('alternative')
+    msg = MIMEMultipart('alternative', policy=EmailPolicy())
     msg['Subject'],msg['From'] = subj,str(from_addr)
     msg['To'] = ', '.join([str(a) for a in listify(to_addrs)])
     if md: msg.attach(MIMEText(md, 'plain'))
@@ -53,14 +55,12 @@ def md2email(subj, from_addr, to_addrs, md, attach=None):
     return create_multipart_msg(subj, from_addr, to_addrs, md=md, html=html, attach=attach)
 
 # %% ../nbs/00_core.ipynb
-@contextmanager
 def smtp_connection(host, port, user=None, password=None, use_ssl=True, use_tls=False):
-    "Context manager for SMTP connection"
+    "Create and return an SMTP connection"
     conn = smtplib.SMTP_SSL(host, port) if use_ssl else smtplib.SMTP(host, port)
     if use_tls and not use_ssl: conn.starttls()
     if user and password: conn.login(user, password)
-    try: yield conn
-    finally: conn.quit()
+    return conn
 
 # %% ../nbs/00_core.ipynb
 class MarkdownMerge:
@@ -70,16 +70,22 @@ class MarkdownMerge:
         self.inserts = [{}]*len(addrs) if inserts is None else inserts
         self.smtp_cfg,self.test = smtp_cfg,test
 
-    def send_msgs(self, pause=0.5):
+    def send_msgs(self, pause=0.2):
         "Send all unsent messages to `addrs` with `pause` secs between each send"
-        with smtp_connection(**self.smtp_cfg) as conn:
-            while self.i < len(self.addrs):
-                addr,insert = self.addrs[self.i],self.inserts[self.i]
-                msg = self.msg.format(**insert)
-                eml = md2email(self.subj, self.from_addr, addr, md=msg)
-                if self.test: print(f"To: {addr}\n{'-'*40}\n{msg}\n{'='*40}\n")
-                else: conn.send_message(eml); sleep(pause)
-                self.i += 1
-                if self.i%100==0: print(self.i)
+        conn = smtp_connection(**self.smtp_cfg)
+        while self.i < len(self.addrs):
+            addr,insert = self.addrs[self.i],self.inserts[self.i]
+            msg = self.msg.format(**insert)
+            eml = md2email(self.subj, self.from_addr, addr, md=msg)
+            if self.test: print(f"To: {addr}\n{'-'*40}\n{msg}\n{'='*40}\n")
+            else:
+                conn.send_message(eml)
+                sleep(pause)
+            self.i += 1
+            if self.i%100==0:
+                print(self.i)
+                conn.quit()
+                conn = smtp_connection(**self.smtp_cfg)
+        conn.quit()
 
     def reset(self): self.i=0
