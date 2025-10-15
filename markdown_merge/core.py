@@ -66,10 +66,10 @@ def smtp_connection(host, port, user=None, password=None, use_ssl=True, use_tls=
 # %% ../nbs/00_core.ipynb
 class MarkdownMerge:
     "Send templated email merge messages formatted with Markdown"
-    def __init__(self, addrs, from_addr, subj, msg, smtp_cfg=None, inserts=None, test=False, hdrs=None):
+    def __init__(self, addrs, from_addr, subj, msg, smtp_cfg=None, inserts=None, test=False, hdrs=None, env_from=None):
         self.addrs,self.from_addr,self.subj,self.msg,self.i = addrs,from_addr,subj,msg,0
         self.inserts = [{}]*len(addrs) if inserts is None else inserts
-        self.smtp_cfg,self.test,self.hdrs = smtp_cfg,test,hdrs
+        self.smtp_cfg,self.test,self.hdrs,self.env_from = smtp_cfg,test,hdrs,env_from
 
     def send_msgs(self, pause=0.2):
         "Send all unsent messages to `addrs` with `pause` secs between each send"
@@ -80,7 +80,7 @@ class MarkdownMerge:
             eml = md2email(self.subj, self.from_addr, addr, md=msg, hdrs=self.hdrs)
             if self.test: print(f"To: {addr}\n{'-'*40}\n{msg}\n{'='*40}\n")
             else:
-                conn.send_message(eml)
+                conn.send_message(eml, from_addr=self.env_from)
                 sleep(pause)
             self.i += 1
             if self.i%100==0:
