@@ -38,10 +38,11 @@ def attach_file(msg, f):
     msg.attach(part)
 
 # %% ../nbs/00_core.ipynb
-def create_multipart_msg(subj, from_addr, to_addrs, md=None, html=None, attach=None):
+def create_multipart_msg(subj, from_addr, to_addrs, md=None, html=None, attach=None, hdrs=None):
     "Create a multipart email with markdown text and HTML"
     msg = MIMEMultipart('alternative', policy=EmailPolicy())
     msg['Subject'],msg['From'] = subj,str(from_addr)
+    for k,v in (hdrs or {}).items(): msg[k]=v
     msg['To'] = ', '.join([str(a) for a in listify(to_addrs)])
     if md: msg.attach(MIMEText(md, 'plain'))
     if html: msg.attach(MIMEText(html, 'html'))
@@ -49,10 +50,10 @@ def create_multipart_msg(subj, from_addr, to_addrs, md=None, html=None, attach=N
     return msg
 
 # %% ../nbs/00_core.ipynb
-def md2email(subj, from_addr, to_addrs, md, attach=None):
+def md2email(subj, from_addr, to_addrs, md, attach=None, hdrs=None):
     "Create a multipart email from markdown"
     html = markdown(md)
-    return create_multipart_msg(subj, from_addr, to_addrs, md=md, html=html, attach=attach)
+    return create_multipart_msg(subj, from_addr, to_addrs, md=md, html=html, attach=attach, hdrs=hdrs)
 
 # %% ../nbs/00_core.ipynb
 def smtp_connection(host, port, user=None, password=None, use_ssl=True, use_tls=False):
@@ -65,10 +66,10 @@ def smtp_connection(host, port, user=None, password=None, use_ssl=True, use_tls=
 # %% ../nbs/00_core.ipynb
 class MarkdownMerge:
     "Send templated email merge messages formatted with Markdown"
-    def __init__(self, addrs, from_addr, subj, msg, smtp_cfg=None, inserts=None, test=False):
+    def __init__(self, addrs, from_addr, subj, msg, smtp_cfg=None, inserts=None, test=False, hdrs=None):
         self.addrs,self.from_addr,self.subj,self.msg,self.i = addrs,from_addr,subj,msg,0
         self.inserts = [{}]*len(addrs) if inserts is None else inserts
-        self.smtp_cfg,self.test = smtp_cfg,test
+        self.smtp_cfg,self.test,self.hdrs = smtp_cfg,test,hdrs
 
     def send_msgs(self, pause=0.2):
         "Send all unsent messages to `addrs` with `pause` secs between each send"
@@ -76,7 +77,7 @@ class MarkdownMerge:
         while self.i < len(self.addrs):
             addr,insert = self.addrs[self.i],self.inserts[self.i]
             msg = self.msg.format(**insert)
-            eml = md2email(self.subj, self.from_addr, addr, md=msg)
+            eml = md2email(self.subj, self.from_addr, addr, md=msg, hdrs=self.hdrs)
             if self.test: print(f"To: {addr}\n{'-'*40}\n{msg}\n{'='*40}\n")
             else:
                 conn.send_message(eml)
