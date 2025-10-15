@@ -2,6 +2,13 @@
 
 <!-- do not remove -->
 
+## 0.1.6
+
+### New Features
+
+- Custom headers ([#9](https://github.com/AnswerDotAI/markdown_merge/issues/9))
+
+
 ## 0.1.5
 
 ### New Features
