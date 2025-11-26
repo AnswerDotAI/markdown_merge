@@ -2,6 +2,13 @@
 
 <!-- do not remove -->
 
+## 0.1.8
+
+### New Features
+
+- Attachments ([#11](https://github.com/AnswerDotAI/markdown_merge/issues/11))
+
+
 ## 0.1.7
 
 ### New Features
