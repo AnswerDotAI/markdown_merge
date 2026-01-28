@@ -1,11 +1,35 @@
 [build-system]
-requires = ["setuptools>=64.0"]
+requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name="markdown_merge"
+dynamic = ["version"]
+description = "Send email using markdown"
+readme = "README.md"
 requires-python=">=3.10"
-dynamic = [ "keywords", "description", "version", "dependencies", "optional-dependencies", "readme", "license", "authors", "classifiers", "entry-points", "scripts", "urls"]
+license = {text = "Apache-2.0"}
+authors = [{name = "Jeremy Howard", email = "github@jhoward.fastmail.fm"}]
+keywords = ['email', 'mail', 'markdown', 'template']
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = []
 
-[tool.uv]
-cache-keys = [{ file = "pyproject.toml" }, { file = "settings.ini" }, { file = "setup.py" }]
+[project.urls]
+Repository = "https://github.com/AnswerDotAI/markdown_merge"
+Documentation = "https://AnswerDotAI.github.io/markdown_merge"
+
+[project.entry-points.nbdev]
+markdown_merge = "markdown_merge._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "markdown_merge.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["markdown_merge"]
+
+[tool.nbdev]
+branch = 'master'
+custom_sidebar = false
