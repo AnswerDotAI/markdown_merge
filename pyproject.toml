@@ -15,7 +15,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
 ]
-dependencies = []
+dependencies = ["fastcore","markdown"]
 
 [project.urls]
 Repository = "https://github.com/AnswerDotAI/markdown_merge"
