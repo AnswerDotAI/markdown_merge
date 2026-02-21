@@ -30,3 +30,9 @@ include = ["markdown_merge"]
 [tool.nbdev]
 branch = 'master'
 custom_sidebar = false
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+    "nbdev>=3.0.12",
+]
