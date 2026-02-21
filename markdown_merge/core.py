@@ -40,7 +40,8 @@ def attach_file(msg, f):
 # %% ../nbs/00_core.ipynb #230184ae
 def create_multipart_msg(subj, from_addr, to_addrs, md=None, html=None, attach=None, hdrs=None):
     "Create a multipart email with markdown text and HTML"
-    msg = MIMEMultipart('alternative', policy=EmailPolicy())
+    mtype = 'mixed' if attach else 'alternative'
+    msg = MIMEMultipart(mtype, policy=EmailPolicy())    
     msg['Subject'],msg['From'] = subj,str(from_addr)
     for k,v in (hdrs or {}).items(): msg[k]=v
     msg['To'] = ', '.join([str(a) for a in listify(to_addrs)])
