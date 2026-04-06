@@ -28,6 +28,7 @@ version = {attr = "markdown_merge.__version__"}
 include = ["markdown_merge"]
 
 [tool.nbdev]
+allowed_metadata_keys = ['solveit_dialog_mode', 'solveit_ver']
 branch = 'master'
 custom_sidebar = false
 
