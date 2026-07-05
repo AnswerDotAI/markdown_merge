@@ -38,3 +38,6 @@ dev = [
     "jupyter>=1.1.1",
     "nbdev>=3.0.12",
 ]
+
+[tool.chkstyle]
+skip_paths = ["_modidx.py"]
