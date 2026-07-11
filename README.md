@@ -22,9 +22,7 @@ password = os.getenv('SES_SMTP_PASS')
 smtp_cfg = dict(host=servernm, port=587, user=username, password=password, use_ssl=False, use_tls=True)
 ```
 
-You can configure your SMTP server settings using the `smtp_cfg`
-dictionary format shown above. The example uses AWS SES with environment
-variables for credentials.
+You can configure your SMTP server settings using the `smtp_cfg` dictionary format shown above. The example uses AWS SES with environment variables for credentials.
 
 ### Provide your email details
 
@@ -45,6 +43,12 @@ ml = MarkdownMerge(to_addrs, from_addr, 'A message', msg, smtp_cfg=smtp_cfg, ins
 ```
 
 The `test=True` parameter prints the messages instead of sending them.
+
+Pass `attach` to include file attachments with your email. It can be a single file path or a list of paths:
+
+``` python
+ml = MarkdownMerge(to_addrs, from_addr, 'Subject', msg, smtp_cfg=smtp_cfg, attach='report.pdf')
+```
 
 ### Send your messages
 
