@@ -33,7 +33,7 @@ allowed_cell_metadata_keys = ['solveit_ai']
 branch = 'master'
 custom_sidebar = false
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
     "jupyter>=1.1.1",
     "nbdev>=3.0.12",
