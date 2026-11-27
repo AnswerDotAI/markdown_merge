@@ -7,7 +7,7 @@ name = "markdown_merge"
 dynamic = ["version"]
 description = "Send email using markdown"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "Apache-2.0"
 authors = [{name = "Jeremy Howard", email = "github@jhoward.fastmail.fm"}]
 keywords = ['email', 'mail', 'markdown', 'template']
